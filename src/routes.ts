@@ -37,6 +37,8 @@ export async function appRoutes(app: FastifyInstance) {
 
         const { date } = getDayParams.parse(request.query);
 
+        console.log(request)
+
         const parsedDate = dayjs(date).startOf('day');
         const weekDay = parsedDate.get('day');
 
@@ -64,7 +66,7 @@ export async function appRoutes(app: FastifyInstance) {
             }
         });
 
-        const completedHabits = day?.dayHabits.map(dayHabit => dayHabit.habit_id);
+        const completedHabits = day?.dayHabits.map(dayHabit => dayHabit.habit_id) ?? []
 
         return { possibleHabits, completedHabits }
     });
